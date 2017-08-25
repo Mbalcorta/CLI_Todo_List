@@ -10,7 +10,8 @@ describe('Should add tasks',() => {
   describe('When once task is added', ()=> {
     let fileContent;
     before(()=>{
-    fs.writeFileSync(jsonFile, '{"tasks":[]}')
+    fs.writeFileSync(jsonFile, '{"tasks":[]}');
+      add('Buy Milk');
       fileContent = fs.readFileSync(terminalText, 'utf8');
     });
     it('should print "Created task 1"', () => {
