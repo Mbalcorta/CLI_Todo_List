@@ -14,7 +14,7 @@ const jsonPath = path.resolve(__dirname, './tasks.json');
 
 fs.stat(jsonPath, (err, stats) => {
     if(err){
-      fs.writeFileSync(jsonPath, '')
+      fs.writeFileSync(jsonPath, '{"tasks":[]}')
     }
 });
 

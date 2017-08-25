@@ -10,8 +10,7 @@ describe('Should add tasks',() => {
   describe('When once task is added', ()=> {
     let fileContent;
     before(()=>{
-      fs.writeFileSync(jsonFile, '{"tasks": [{"id":1,"description":"Buy Milk","incomplete":true}]}');
-      add('Buy Milk');
+    fs.writeFileSync(jsonFile, '{"tasks":[]}')
       fileContent = fs.readFileSync(terminalText, 'utf8');
     });
     it('should print "Created task 1"', () => {
@@ -21,12 +20,24 @@ describe('Should add tasks',() => {
   describe('When two task are added', ()=> {
     let fileContent;
     before(()=>{
-      fs.writeFileSync(jsonFile, '{"tasks":[{"id":1,"description":"Buy Milk","incomplete":true},{"id":2,"description":"Buy eggs","incomplete":true}]}');
+      fs.writeFileSync(jsonFile, '{"tasks":[]}')
       add('Buy eggs');
+      add('Buy Milk');
       fileContent = fs.readFileSync(terminalText, 'utf8')
     });
     it('should print "Created task 2"', () => {
       assert.equal(fileContent, 'Created task 2');
+    });
+  })
+  describe('When one task is added when passed as argument', ()=> {
+     let fileContent;
+    before(()=>{
+      fs.writeFileSync(jsonFile, '{"tasks":[]}')
+      add('Buy eggs');
+      fileContent = fs.readFileSync(jsonFile, 'utf8')
+    });
+    it('it will create an object with a tasks array"', () => {
+       assert.equal(fileContent, '{"tasks":[{"id":1,"description":"Buy eggs","incomplete":true}]}');
     });
   })
 });
