@@ -24,8 +24,6 @@ const header = () => {
   console.log('-- -------------');
 };
 
-
-
 switch(firstArgument){
   case 'add':
     if(taskString){

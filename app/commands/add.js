@@ -5,7 +5,9 @@ const path = require('path');
 
 const writingToJsonFile = (taskObjectString, modifiedTasksObject, filePath) => {
   fs.writeFileSync(filePath, taskObjectString);
+  if(filePath === path.resolve(__dirname, './tasks.json')){
   process.stdout.write(`Created task ${modifiedTasksObject.tasks.length}`);
+  };
   // fs.writeFileSync(pathToTerminalTextTest, `Created task ${modifiedTasksObject.tasks.length}`);
 };
 

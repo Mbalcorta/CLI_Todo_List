@@ -23,51 +23,45 @@ describe('Should add tasks',() => {
     });
   });
 
-
-
-
-
-
-
-
-
-  // describe('When four tasks are added', ()=> {
-  //   let fileContent;
-  //   before(()=>{
-  //     fs.writeFileSync(jsonFile, '{"tasks":[]}')
-  //     add('Buy Eggs', 1);
-  //     add('Buy Milk', 2);
-  //     add('Walk dogs', 3);
-  //     add('Read to baby', 4);
-  //     fileContent = fs.readFileSync(terminalText, 'utf8')
-  //   });
-  //   it('should print "Created task 4"', () => {
-  //     assert.equal(fileContent, 'Created task 4');
-  //   });
-  // })
-  // describe('When one task is added when passed as argument', ()=> {
-  //    let fileContent;
-  //   before(()=>{
-  //     fs.writeFileSync(jsonFile, '{"tasks":[]}')
-  //     add('Buy eggs', 1);
-  //     fileContent = fs.readFileSync(jsonFile, 'utf8')
-  //   });
-  //   it('it will create an object with a tasks array"', () => {
-  //      assert.equal(fileContent, '{"tasks":[{"id":1,"description":"Buy eggs","incomplete":true}]}');
-  //   });
-  // });
-  // describe('When two tasks added terminal', ()=> {
-  //    let fileContent;
-  //   before(()=>{
-  //     fs.writeFileSync(jsonFile, '{"tasks":[]}')
-  //     add('Buy eggs', 1);
-  //     add('Buy milk', 2);
-  //     fileContent = fs.readFileSync(terminalText, 'utf8')
-  //   });
-  //   it('should print created task 2"', () => {
-  //      assert.equal(fileContent, 'Created task 2');
-  //   });
-  // })
+  describe('When four tasks are added', ()=> {
+    let jsonObject;
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}')
+      add('Buy Eggs', 1, jsonTestFile);
+      add('Buy Milk', 2, jsonTestFile);
+      add('Walk dogs', 3, jsonTestFile);
+      add('Read to baby', 4, jsonTestFile);
+      const fileContent = fs.readFileSync(jsonTestFile, 'utf8')
+      jsonObject = JSON.parse(fileContent);
+    });
+    it('should contain Walk dogs task as an object at the second index', () => {
+      assert.equal(jsonObject.tasks[2].description, 'Walk dogs');
+    });
+  })
+  describe('When one task is added when passed as argument', ()=> {
+     let fileContent;
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}')
+      add('Buy eggs', 1, jsonTestFile);
+      fileContent = fs.readFileSync(jsonTestFile, 'utf8')
+    });
+    it('it will create an object with a tasks array"', () => {
+       assert.equal(fileContent, '{"tasks":[{"id":1,"description":"Buy eggs","incomplete":true}]}');
+    });
+  });
+  describe('When two tasks added terminal', ()=> {
+     let jsonObject;
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}')
+      add('Buy eggs', 1, jsonTestFile);
+      add('Buy milk', 2, jsonTestFile);
+      const fileContent = fs.readFileSync(jsonTestFile, 'utf8');
+      jsonObject = JSON.parse(fileContent);
+    });
+    it('Third element to be accessed will be undefined', () => {
+       assert.equal(jsonObject.tasks[3], undefined);
+    });
+  })
 });
 //
 // describe('prints complete is exported',() => {
