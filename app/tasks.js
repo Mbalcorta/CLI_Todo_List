@@ -19,15 +19,15 @@ const header = () => {
 
 fs.stat(jsonPath, (err, stats) => {
     if(err){
-      fs.writeFileSync(jsonPath, '{"tasks":[], "taskNumber": 1}')
+      //need taskNumber to persist
+      fs.writeFileSync(jsonPath, '{"tasks":[]}')
     }
 
     switch(firstArgument){
       case 'add':
         if(taskString){
           header();
-          add(taskString, taskNumber, jsonPath);
-          taskNumber++;
+          add(taskString, jsonPath);
         }
         break;
       case 'complete':

@@ -22,13 +22,14 @@ const pushNewObjectToTasksArray = (newTaskObject, allTasksObject) => {
 };
 
 
-exports.add = (taskString, taskNumber, filePath) => {
+exports.add = (taskString, filePath) => {
 
   if(taskString){
     //first must read whats in jsonFile
     const readJsonFile = fs.readFileSync(filePath, 'utf8');
     //pull what is in jsonFile and Json.parse
     const tasksObject = JSON.parse(readJsonFile);
+    const taskNumber =  tasksObject.tasks.length+1;
     //turn string into object;
     const newTaskObject = turnIntoObject(taskString, taskNumber);
     //hold object and then push new array into tasks array
