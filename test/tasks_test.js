@@ -85,7 +85,7 @@ describe('should return list of incomplete tasks',() => {
     });
     //checking before and after of print txt file
     it('should print "You have 0 tasks" if no task', () => {
-         assert.equal(list(jsonTestFile), 'You have 0 tasks');
+         assert.equal(list(jsonTestFile), '\nYou have 0 tasks\n');
     });
   });
 
@@ -98,7 +98,7 @@ describe('should return list of incomplete tasks',() => {
 
     //checking before and after of print txt file
     it('If one task is added should return list of task id and description', () => {
-         assert.equal(list(jsonTestFile), '1 Buy Milk\n\nyou have 1 task\n');
+         assert.equal(list(jsonTestFile), '1 Buy Milk\n\nYou have 1 task\n');
       });
   });
 
@@ -113,7 +113,7 @@ describe('should return list of incomplete tasks',() => {
 
     //checking before and after of print txt file
     it('If multiple tasks it should print to terminal list of id and description', () => {
-         assert.equal(list(jsonTestFile), '1 Buy Milk\n2 Take dogs on walk\n3 Go for a bike ride\n4 Take baby to beach\n\nyou have 4 task\n');
+         assert.equal(list(jsonTestFile), '1 Buy Milk\n2 Take dogs on walk\n3 Go for a bike ride\n4 Take baby to beach\n\nYou have 4 tasks\n');
       });
   });
 
@@ -126,20 +126,33 @@ describe('should return list of incomplete tasks',() => {
 
     //checking before and after of print txt file
     it('should only print incomplete task', () => {
-         assert.equal(list(jsonTestFile), '2 Buy Milk\n\nyou have 1 task\n');
-      });
+        assert.equal(list(jsonTestFile), '2 Buy Milk\n\nYou have 1 task\n');
+    });
   })
 });
 
-describe('When task marked as completed',() => {
-  before(()=>{
-    fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
-    add('Buy Milk', jsonTestFile);
-    add('Go for a walk', jsonTestFile);
-    add('Build a fence', jsonTestFile);
-  });
+describe('Tasks completed: ',() => {
+  describe('When task marked as completed', () => {
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
+      add('Buy Milk', jsonTestFile);
+      add('Go for a walk', jsonTestFile);
+      add('Build a fence', jsonTestFile);
+    });
 
-  it("will print, Completed tasks 1: 'Buy Milk'", () => {
-    assert.equal(complete(1, jsonTestFile), "Completed tasks 1: 'Buy Milk\n'");
-  });
+    it("will print, Completed tasks 1: 'Buy Milk'", () => {
+      assert.equal(complete(1, jsonTestFile), 'Completed tasks 1: \'Buy Milk\'\n');
+    });
+  })
+
+  describe('When no tasks available', () => {
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
+    });
+
+    it("will print You have 0 tasks when no tasks available ", () => {
+      assert.equal(complete(1, jsonTestFile), 'You have 0 tasks\n');
+    });
+  })
+
 });

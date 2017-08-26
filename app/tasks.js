@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict'
 const path = require('path');
 const fs = require('fs');
 const add = require('./commands/add.js').add;
@@ -13,8 +14,8 @@ const jsonPath = path.resolve(__dirname, './tasks.json');
 
 //need to figure header out
 const header = () => {
-  console.log('ID Description');
-  console.log('-- -------------');
+  process.stdout.write('ID Description\n');
+  process.stdout.write('-- -------------\n');
 };
 
 fs.stat(jsonPath, (err, stats) => {
