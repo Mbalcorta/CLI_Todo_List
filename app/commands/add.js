@@ -5,8 +5,8 @@ const path = require('path');
 
 const writingToJsonFile = (taskObjectString, modifiedTasksObject, filePath) => {
   fs.writeFileSync(filePath, taskObjectString);
-  if(filePath === path.resolve(__dirname, './tasks.json')){
-  process.stdout.write(`Created task ${modifiedTasksObject.tasks.length}`);
+  if(filePath === path.resolve(__dirname, '../tasks.json')){
+  process.stdout.write(`Created task ${modifiedTasksObject.tasks.length}\n`);
   };
   // fs.writeFileSync(pathToTerminalTextTest, `Created task ${modifiedTasksObject.tasks.length}`);
 };
@@ -23,7 +23,6 @@ const pushNewObjectToTasksArray = (newTaskObject, allTasksObject) => {
 
 
 exports.add = (taskString, taskNumber, filePath) => {
-
 
   if(taskString){
     //first must read whats in jsonFile
@@ -43,6 +42,4 @@ exports.add = (taskString, taskNumber, filePath) => {
     //eventually make a test to catch an error when no string entered
     return 'Error: must enter task';
   }
-
-
 };

@@ -7,16 +7,9 @@ const deleted = require('./commands/delete.js').deleted;
 const list = require('./commands/list.js').list;
 const args = process.argv.slice(2);
 const firstArgument = args[0];
-const taskString = process.argv[3]
-let taskNumber = 1;
+const taskString = process.argv.slice(3).join(' ');
 //checks if specific file exist/ if not make file
 const jsonPath = path.resolve(__dirname, './tasks.json');
-
-fs.stat(jsonPath, (err, stats) => {
-    if(err){
-      fs.writeFileSync(jsonPath, '{"tasks":[]}')
-    }
-});
 
 //need to figure header out
 const header = () => {
@@ -24,26 +17,35 @@ const header = () => {
   console.log('-- -------------');
 };
 
-switch(firstArgument){
-  case 'add':
-    if(taskString){
-      header();
-      add(taskString, taskNumber, jsonPath);
-      taskNumber++;
+fs.stat(jsonPath, (err, stats) => {
+    if(err){
+      fs.writeFileSync(jsonPath, '{"tasks":[], "taskNumber": 1}')
     }
-    break;
-  case 'complete':
-    complete();
-    break;
-  case 'delete':
-    deleted();
-    break;
-  case 'list':
-    header();
-    list();
-    break;
-  default:
-    console.log('Error: not a correct command, please try again')
-}
+
+    switch(firstArgument){
+      case 'add':
+        if(taskString){
+          header();
+          add(taskString, taskNumber, jsonPath);
+          taskNumber++;
+        }
+        break;
+      case 'complete':
+        complete();
+        break;
+      case 'delete':
+        deleted();
+        break;
+      case 'list':
+        header();
+        list(jsonPath);
+        break;
+      default:
+        console.log('Error: not a correct command, please try again');
+    }
+  });
+
+
+
 
 module.exports = {add, complete, deleted, list, jsonPath, path}
