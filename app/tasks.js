@@ -22,7 +22,6 @@ fs.stat(jsonPath, (err, stats) => {
       //need taskNumber to persist
       fs.writeFileSync(jsonPath, '{"tasks":[]}')
     }
-
     switch(firstArgument){
       case 'add':
         if(taskString){

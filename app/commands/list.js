@@ -25,6 +25,7 @@ const writeToFile = (arrayOfTasksObjects, jsonPath) => {
 exports.list = (jsonPath) => {
     const fileContents = fs.readFileSync(jsonPath, 'utf8');
     const jsonTasks = JSON.parse(fileContents);
+    //######print this depending on how many items are incomplete
     if(jsonTasks.tasks.length === 0){
       if(jsonPath === path.resolve(__dirname, '../tasks.json')){
         process.stdout.write('You have 0 tasks\n');

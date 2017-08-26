@@ -5,17 +5,19 @@ const path = require('path');
 const ChangeIncompleteStatus = (arrayOfObjects, taskNumber) => {
   arrayOfObjects[taskNumber].incomplete = false;
   const taskTitle = arrayOfObjects[taskNumber].description;
-  return  `Completed tasks ${taskNumber+1}: '${taskTitle}'`;
-}
+  return  `Completed tasks ${taskNumber+1}: '${taskTitle}'\n`;
+};
 
 //complete will change incomplete status is false;
 exports.complete = (taskNumber, filePath) => {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const objectTasks = JSON.parse(fileContents);
-  const arrayOfObjects = objectTasks.tasks
+  const arrayOfObjects = objectTasks.tasks;
   const stringReturnValue = ChangeIncompleteStatus(arrayOfObjects, (Number(taskNumber)-1));
+  const objectTasksString = JSON.stringify(objectTasks);
+  fs.writeFileSync(filePath, objectTasksString);
   if(filePath === path.resolve(__dirname, '../tasks.json')){
     process.stdout.write(stringReturnValue);
-  };
+  }
   return stringReturnValue;
 };

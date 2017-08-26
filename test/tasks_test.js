@@ -140,6 +140,6 @@ describe('When task marked as completed',() => {
   });
 
   it("will print, Completed tasks 1: 'Buy Milk'", () => {
-    assert.equal(complete(1, jsonTestFile), "Completed tasks 1: 'Buy Milk'");
+    assert.equal(complete(1, jsonTestFile), "Completed tasks 1: 'Buy Milk\n'");
   });
 });
