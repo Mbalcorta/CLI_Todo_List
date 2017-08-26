@@ -19,7 +19,6 @@ const header = () => {
 
 fs.stat(jsonPath, (err, stats) => {
     if(err){
-      //need taskNumber to persist
       fs.writeFileSync(jsonPath, '{"tasks":[]}')
     }
     switch(firstArgument){

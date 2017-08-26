@@ -25,16 +25,22 @@ const writeToFile = (arrayOfTasksObjects, jsonPath) => {
 exports.list = (jsonPath) => {
     const fileContents = fs.readFileSync(jsonPath, 'utf8');
     const jsonTasks = JSON.parse(fileContents);
-    //######print this depending on how many items are incomplete
-    if(jsonTasks.tasks.length === 0){
-      if(jsonPath === path.resolve(__dirname, '../tasks.json')){
-        process.stdout.write('You have 0 tasks\n');
-      }
-      return 'You have 0 tasks';
-    } else {
+
+    // //######print this depending on how many items are incomplete
+    // if(jsonTasks.tasks.length === 0){
+    //   if(jsonPath === path.resolve(__dirname, '../tasks.json')){
+    //     process.stdout.write('You have 0 tasks\n');
+    //   }
+    //   return 'You have 0 tasks';
+    // } else {
+    //   const arrayOfObjects = filter(jsonTasks.tasks);
+    //   if(arrayOfObjects.length > 0) {
+    //     return writeToFile(arrayOfObjects, jsonPath);
+    //   }
+    // }
+
       const arrayOfObjects = filter(jsonTasks.tasks);
-      if(arrayOfObjects.length > 0) {
-        return writeToFile(arrayOfObjects, jsonPath);
-      }
-    }
+      writeToFile(arrayOfObjects, jsonPath);
+       //change return value
+      // return writeToFile(arrayOfObjects, jsonPath);
 };
