@@ -31,7 +31,7 @@ fs.stat(jsonPath, (err, stats) => {
         }
         break;
       case 'complete':
-        complete();
+        complete(taskString, jsonPath);
         break;
       case 'delete':
         deleted();

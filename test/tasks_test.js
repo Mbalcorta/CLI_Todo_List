@@ -64,11 +64,7 @@ describe('Should add tasks',() => {
   })
 });
 
-// describe('prints complete is exported',() => {
-//   it('should return complete is exported string', () => {
-//     assert.equal(complete(), 'complete is exported', 'says complete is exported');
-//   });
-// });
+
 //
 // describe('prints deleted is exported',() => {
 //   it('should return deleted is exported string', () => {
@@ -133,4 +129,17 @@ describe('should return list of incomplete tasks',() => {
          assert.equal(list(jsonTestFile), '2 Buy Milk\n\nyou have 1 task\n');
       });
   })
+});
+
+describe('When task marked as completed',() => {
+  before(()=>{
+    fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
+    add('Buy Milk', jsonTestFile);
+    add('Go for a walk', jsonTestFile);
+    add('Build a fence', jsonTestFile);
+  });
+
+  it("will print, Completed tasks 1: 'Buy Milk'", () => {
+    assert.equal(complete(1, jsonTestFile), "Completed tasks 1: 'Buy Milk'");
+  });
 });
