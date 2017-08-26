@@ -8,7 +8,7 @@ const list = require('./commands/list.js').list;
 const args = process.argv.slice(2);
 const firstArgument = args[0];
 const taskString = process.argv[3]
-
+let taskNumber = 1;
 //checks if specific file exist/ if not make file
 const jsonPath = path.resolve(__dirname, './tasks.json');
 
@@ -24,13 +24,15 @@ const header = () => {
   console.log('-- -------------');
 };
 
-if(taskString){
-  header();
-}
+
 
 switch(firstArgument){
   case 'add':
-    add(taskString)
+    if(taskString){
+      header();
+      add(taskString, taskNumber, jsonPath);
+      taskNumber++;
+    }
     break;
   case 'complete':
     complete();
@@ -39,6 +41,7 @@ switch(firstArgument){
     deleted();
     break;
   case 'list':
+    header();
     list();
     break;
   default:
