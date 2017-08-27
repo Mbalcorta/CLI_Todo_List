@@ -148,8 +148,27 @@ describe('Tasks completed: ',() => {
 });
 
 
-// describe('prints deleted is exported',() => {
-//   it('should return deleted is exported string', () => {
-//     assert.equal(deleted(), 'deleted is exported', 'says deleted is exported');
-//   });
-// });
+describe('Tasks deleted: ',() => {
+  describe('When task marked as deleted', () => {
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
+      add('Buy Milk', jsonTestFile);
+      add('Go for a walk', jsonTestFile);
+      add('Build a fence', jsonTestFile);
+    });
+
+    it("will print, Deleted tasks 1: 'Buy Milk'", () => {
+      assert.equal(deleted(1, jsonTestFile), 'Deleted tasks 1: \'Buy Milk\'\n');
+    });
+  })
+
+  describe('When no tasks available', () => {
+    before(()=>{
+      fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
+    });
+
+    it("will print You have 0 tasks when no tasks available ", () => {
+      assert.equal(deleted(1, jsonTestFile), 'You have 0 tasks\n');
+    });
+  })
+});

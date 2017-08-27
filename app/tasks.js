@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-'use strict'
+'use strict';
 const path = require('path');
 const fs = require('fs');
 const add = require('./commands/add.js').add;
@@ -9,18 +9,18 @@ const list = require('./commands/list.js').list;
 const args = process.argv.slice(2);
 const firstArgument = args[0];
 const taskString = process.argv.slice(3).join(' ');
-//checks if specific file exist/ if not make file
+
 const jsonPath = path.resolve(__dirname, './tasks.json');
 
-//need to figure header out
 const header = () => {
   process.stdout.write('ID Description\n');
   process.stdout.write('-- -------------\n');
 };
 
-fs.stat(jsonPath, (err, stats) => {
+//checks if specific file exist/ if not make file
+fs.stat(jsonPath, (err) => {
     if(err){
-      fs.writeFileSync(jsonPath, '{"tasks":[]}')
+      fs.writeFileSync(jsonPath, '{"tasks":[]}');
     }
     switch(firstArgument){
       case 'add':
