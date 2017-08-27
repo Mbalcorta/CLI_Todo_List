@@ -7,7 +7,7 @@ path.resolve( __dirname,'./test_json.json');
 
 
 
-describe('Should add tasks',() => {
+describe('Add:',() => {
   describe('When one task is added', ()=> {
     let contents ='';
     before(()=>{
@@ -64,16 +64,7 @@ describe('Should add tasks',() => {
   })
 });
 
-
-//
-// describe('prints deleted is exported',() => {
-//   it('should return deleted is exported string', () => {
-//     assert.equal(deleted(), 'deleted is exported', 'says deleted is exported');
-//   });
-// });
-
-
-describe('should return list of incomplete tasks',() => {
+describe('list:',() => {
 
   after(()=>{
     fs.writeFileSync(jsonTestFile, '{"tasks":[]}');
@@ -154,5 +145,11 @@ describe('Tasks completed: ',() => {
       assert.equal(complete(1, jsonTestFile), 'You have 0 tasks\n');
     });
   })
-
 });
+
+
+// describe('prints deleted is exported',() => {
+//   it('should return deleted is exported string', () => {
+//     assert.equal(deleted(), 'deleted is exported', 'says deleted is exported');
+//   });
+// });

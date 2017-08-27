@@ -24,16 +24,13 @@ fs.stat(jsonPath, (err, stats) => {
     }
     switch(firstArgument){
       case 'add':
-        if(taskString){
-          header();
           add(taskString, jsonPath);
-        }
         break;
       case 'complete':
         complete(taskString, jsonPath);
         break;
       case 'delete':
-        deleted();
+        deleted(taskString, jsonPath);
         break;
       case 'list':
         header();
