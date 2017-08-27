@@ -7,7 +7,7 @@ npm install -g
 
 "tasks" command supports the following options
 
-add <task name>
-list
-complete <task-id>
-delete <tasks-id>
+* add <task name>
+* list
+* complete <task-id>
+* delete <tasks-id>
