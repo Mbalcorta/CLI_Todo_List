@@ -1,6 +1,6 @@
 # Todo Command Line App
-Command Line Todo list phase 1 project for Learners Guild
-Built with node js and testing with mocha and chai
+Command Line Todo list phase 2 project for Learners Guild
+Built with node js and testing with mocha and chai. Using asynchronous code to read and write to files.
 
 To start project:
 npm install -g
