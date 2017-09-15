@@ -9,11 +9,13 @@ const readFileAndParse = (filePath) => {
 
 const writeToFile = (filePath, objectTasksString) => {
   fs.writeFileSync(filePath, objectTasksString);
-  if(filePath === path.resolve(__dirname, '../tasks.json')){
-    process.stdout.write(stringReturnValue);
-  }
 };
 
+const printToTerminal = (filePath, stringValue) => {
+  if(filePath === path.resolve(__dirname, '../tasks.json')){
+    process.stdout.write(stringValue);
+  }
+}
 const ChangeIncompleteStatus = (arrayOfObjects, taskNumber, filePath) => {
   if(arrayOfObjects[taskNumber] && arrayOfObjects[taskNumber].incomplete){
       const taskTitle = arrayOfObjects[taskNumber].description;
@@ -28,12 +30,13 @@ const ChangeIncompleteStatus = (arrayOfObjects, taskNumber, filePath) => {
     }
 };
 
-//complete will change incomplete status is false;
+//complete will change incomplete status if false;
 exports.complete = (taskNumber, filePath) => {
   const objectTasks = readFileAndParse(filePath);
   const arrayOfTaskObjects = objectTasks.tasks;
   const stringReturnValue = ChangeIncompleteStatus(arrayOfTaskObjects, (Number(taskNumber)-1), filePath);
   const objectTasksString = JSON.stringify(objectTasks);
+  printToTerminal(filePath, stringReturnValue);
   writeToFile(filePath, objectTasksString);
   return stringReturnValue;
 };
